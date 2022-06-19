@@ -1,0 +1,19 @@
+version: '3.5'
+
+services:
+  phpnginx:
+    build:
+      context: .
+      dockerfile: development.Dockerfile
+    image: php.nginx:development
+    extra_hosts:
+        - "host.docker.internal:host-gateway"
+    volumes:
+     - /var/www/application/:/var/www/html/
+    ports:
+      - '8100:8080'
+
+networks:
+  default:
+    name: main-network
+    external: true
